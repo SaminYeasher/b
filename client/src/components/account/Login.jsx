@@ -9,7 +9,7 @@ const Component = styled(Box)`
 `;
 
 const Image = styled('img')({
-    width: 100,
+    width: `200px`,
     display: 'flex',
     margin: 'auto',
     padding: '50px 0 0'
@@ -28,7 +28,7 @@ const Wrapper = styled(Box)`
 
 const LoginButton = styled(Button)`
     text-transform: none;
-    background: #FB641B;
+    background:rgb(251, 154, 27);
     color: #fff;
     height: 48px;
     border-radius: 2px;
@@ -52,7 +52,7 @@ const Text = styled(Typography)`
 const Login = () => {
     const [account, toggleAccount] = useState('login');
 
-    const imageURL = 'https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png';
+    //const imageURL = 'https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png';
 
     const toggleSignup = () => {
         account === 'signup' ? toggleAccount('login') : toggleAccount('signup');
@@ -61,7 +61,7 @@ const Login = () => {
     return (
         <Component>
             <Box>
-                <Image src={imageURL} alt="blog" />
+                <Image src="/logo1.png" alt="blog" />
                 {
                     account === 'login' ?
                         <Wrapper>
