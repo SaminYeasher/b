@@ -100,7 +100,7 @@ const Login = () => {
 
                             <LoginButton variant="contained"  >Login</LoginButton>
                             <Text style={{ textAlign: 'center' }}>OR</Text>
-                            <SignupButton onClick={() => toggleSignup()} style={{ marginBottom: 50 }}>Create an account</SignupButton>
+                            <SignupButton onClick={() => toggleSignup()} style={{ marginBottom: 50 }}>Create an Account</SignupButton>
                         </Wrapper> :
                         <Wrapper>
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter Name' />
