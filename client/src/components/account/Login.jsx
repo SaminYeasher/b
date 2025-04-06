@@ -57,6 +57,12 @@ const Text = styled(Typography)`
     color: #878787;
     font-size: 12px;
 `;
+
+const loginInitialValues = {
+    username: '',
+    password: ''
+};
+
 const signupInitialValues = {
     name: '',
     username: '',
@@ -66,6 +72,7 @@ const signupInitialValues = {
 const Login = () => {
     const [account, toggleAccount] = useState('login');
     const [signup, setSignup] = useState(signupInitialValues);
+    const [login, setLogin] = useState(loginInitialValues);
     const [error, showError] = useState('');
 
     const toggleSignup = () => {
@@ -86,6 +93,10 @@ const Login = () => {
         }
     }
 
+    const onValueChange = (e) => {
+        setLogin({ ...login, [e.target.name]: e.target.value });
+    }
+
     return (
         <Component>
             <Box>
@@ -93,12 +104,12 @@ const Login = () => {
                 {
                     account === 'login' ?
                         <Wrapper>
-                            <TextField variant="standard" label='Enter Username' />
-                            <TextField variant="standard"  label='Enter Password' />
+                        <TextField variant="standard" value={login.username} onChange={(e) => onValueChange(e)} name='username' label='Enter Username' />
+                        <TextField variant="standard" value={login.password} onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
                             
                             {error && <Error>{error}</Error>}
 
-                            <LoginButton variant="contained"  >Login</LoginButton>
+                            <LoginButton variant="contained" onClick={() => loginUser()} >Login</LoginButton>
                             <Text style={{ textAlign: 'center' }}>OR</Text>
                             <SignupButton onClick={() => toggleSignup()} style={{ marginBottom: 50 }}>Create an Account</SignupButton>
                         </Wrapper> :
