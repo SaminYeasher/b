@@ -73,7 +73,7 @@ const signupInitialValues = {
     password: '',
 }
 
-const Login = () => {
+const Login = ({isUserAuthenticated}) => {
     const [account, toggleAccount] = useState('login');
     const [signup, setSignup] = useState(signupInitialValues);
     const [login, setLogin] = useState(loginInitialValues);
@@ -109,6 +109,8 @@ const Login = () => {
             sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
             setAccount({ name: response.data.name, username: response.data.username });
             
+            isUserAuthenticated(true);
+
             navigate('/');
         } else {
             showError('Something went wrong! please try again later');
