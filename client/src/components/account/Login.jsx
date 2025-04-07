@@ -60,7 +60,7 @@ const Text = styled(Typography)`
 
 const loginInitialValues = {
     username: '',
-    password: ''
+    password: '',
 };
 
 const signupInitialValues = {
@@ -88,6 +88,15 @@ const Login = () => {
             showError('');
             setSignup(signupInitialValues);
             toggleAccount('login');
+        } else {
+            showError('Something went wrong! please try again later');
+        }
+    }
+
+    const loginUser = async () => {
+        let response = await API.userLogin(login);
+        if (response.isSuccess) {
+            showError('');
         } else {
             showError('Something went wrong! please try again later');
         }
