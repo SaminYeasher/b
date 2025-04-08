@@ -63,19 +63,31 @@ const CreatePost = () => {
     
     useEffect(() => {
         const getImage = async () => { 
-            if(file) {
+            if (file) {
                 const data = new FormData();
-                data.append("name", file.name);
                 data.append("file", file);
-                
-                const response = await API.uploadFile(data);
-                post.picture = response.data;
+        
+                const response = await API.uploadFile(data); // Upload the file
+        
+                if (response?.isSuccess && response.data?.imageUrl) {  // <-- Safety check
+                    setPost(prevState => ({
+                        ...prevState,
+                        picture: response.data.imageUrl
+                    }));
+                } else {
+                    console.error("File upload failed:", response);
+                }
             }
         }
+    
         getImage();
-        post.categories = location.search?.split('=')[1] || 'All';
-        post.username = account.username;
-    }, [file])
+        setPost(prevState => ({
+            ...prevState,
+            categories: location.search?.split('=')[1] || 'All',
+            username: account.username
+        }));
+    }, [file]);
+    
 
     const savePost = async () => {
         await API.createPost(post);

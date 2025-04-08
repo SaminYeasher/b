@@ -4,6 +4,8 @@ import { API_NOTIFICATION_MESSAGES, SERVICE_URLS } from '../constants/config.js'
 
 const API_URL = 'http://localhost:8000';
 
+
+
 const axiosInstance = axios.create({
     baseURL: API_URL,
     timeout: 10000, 
@@ -93,6 +95,7 @@ for (const [key, value] of Object.entries(SERVICE_URLS)) {
             url: value.url,
             data: body,
             responseType: value.responseType,
+            headers: value.headers || {},   // <-- ADDed THIS LINE
             onUploadProgress: function(progressEvent) {
                 if (showUploadProgress) {
                     let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);

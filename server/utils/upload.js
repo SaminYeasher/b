@@ -1,26 +1,26 @@
 import multer from 'multer';
-import { GridFsStorage } from 'multer-gridfs-storage';
-import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
-
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
-
-const storage = new GridFsStorage({
-    url: `mongodb://${username}:${password}@blog-app-shard-00-00.srugn.mongodb.net:27017,blog-app-shard-00-01.srugn.mongodb.net:27017,blog-app-shard-00-02.srugn.mongodb.net:27017/?replicaSet=atlas-8unvhg-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=blog-app`,
-    file: (request, file) => {
-        const match = ["image/png", "image/jpg", "image/jpeg"];
-
-        if (match.indexOf(file.mimetype) === -1) {
-            return `${Date.now()}-blog-${file.originalname}`;
-        }
-
-        return {
-            bucketName: "photos",
-            filename: `${Date.now()}-blog-${file.originalname}`
-        };
+// Define storage for images
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');  // Save to 'uploads' folder
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);  // Unique filename
     }
 });
 
-export default multer({ storage });
+// File filter - allow only images
+const fileFilter = (req, file, cb) => {
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (allowedMimeTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(new Error('Invalid file type. Only JPEG, PNG, JPG are allowed.'), false);
+    }
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
+
+export default upload;

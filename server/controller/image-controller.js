@@ -1,11 +1,9 @@
-
 const url = 'http://localhost:8000';
 
-export const uploadImage = (request, response) => {
-    if(!request.file) 
-        return response.status(404).json("File not found");
-    
-    const imageUrl = `${url}/file/${request.file.filename}`;
-
-    response.status(200).json(imageUrl);    
-}
+export const uploadImage = (req, res) => {
+    if (!req.file) {
+        return res.status(404).json("File not found");
+    }
+    const imageUrl = `${url}/uploads/${req.file.filename}`;
+    res.status(200).json({ imageUrl });
+};
