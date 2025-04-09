@@ -1,6 +1,7 @@
 
 import { styled, Box, Typography } from '@mui/material';
 
+
 const Container = styled(Box)`
     border: 1px solid #d3cede;
     border-radius: 10px;
@@ -49,7 +50,7 @@ const Post = ({ post }) => {
             <Text>{post.categories}</Text>
             <Heading>{addEllipsis(post.title, 20)}</Heading>
             <Text>Author: {post.username}</Text>
-            <Details>{addEllipsis(post.description, 100)}</Details>
+            <Details>{addEllipsis(post.description, 36)}</Details>
         </Container>
     )
 }

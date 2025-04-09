@@ -13,3 +13,4 @@ export const getType = (value, body) => {
     }
     return {};
 }
+
