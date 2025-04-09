@@ -30,6 +30,6 @@ export const SERVICE_URLS = {
     userLogin: { url: '/login', method: 'POST' },
     userSignup: { url: '/signup', method: 'POST' },
     uploadFile: { url: '/upload', method: 'POST',headers: { 'Content-Type': 'multipart/form-data' } ,  // <-- this is also important
-    
     },
+    createPost: { url: 'create', method: 'POST' },
 }
