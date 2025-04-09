@@ -12,6 +12,16 @@ export const createPost = async (request, response) => {
     }
 }
 
+export const getPost = async (request, response) => {
+    try {
+        const post = await Post.findById(request.params.id);
+
+        response.status(200).json(post);
+    } catch (error) {
+        response.status(500).json(error)
+    }
+}
+
 export const getAllPosts = async (request, response) => {
     let username = request.query.username;
     let category = request.query.category;
