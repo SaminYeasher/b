@@ -32,4 +32,5 @@ export const SERVICE_URLS = {
     uploadFile: { url: '/upload', method: 'POST',headers: { 'Content-Type': 'multipart/form-data' } ,  // <-- this is also important
     },
     createPost: { url: 'create', method: 'POST' },
+    getAllPosts: { url: '/posts', method: 'GET', params: true },
 }
