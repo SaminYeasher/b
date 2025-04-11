@@ -55,7 +55,7 @@ const Update = () => {
 
     const [post, setPost] = useState(initialPost);
     const [file, setFile] = useState('');
-    const [imageURL, setImageURL] = useState('');
+    const [setImageURL] = useState('');
 
     const { id } = useParams();
 
@@ -69,7 +69,7 @@ const Update = () => {
             }
         }
         fetchData();
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         const getImage = async () => { 
@@ -86,7 +86,7 @@ const Update = () => {
             }
         }
         getImage();
-    }, [file])
+    }, [file,post])
 
     const updateBlogPost = async () => {
         await API.updatePost(post);

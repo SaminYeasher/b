@@ -1,32 +1,35 @@
 import React, { useState, useContext } from 'react';
- 
 import { TextField, Box, Button, Typography, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
-
 import { API } from '../../service/api';
-
 import { DataContext } from '../../context/DataProvider';
 
 const Component = styled(Box)`
     width: 400px;
     margin: auto;
-    box-shadow: 5px 2px 5px 2px rgb(0 0 0/ 0.6);
+    background: linear-gradient(45deg, #FF7F50,rgba(128, 234, 211, 0.9));
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.1);
 `;
 
 const Image = styled('img')({
-    width: `200px`,
+    width: '200px',
     display: 'flex',
     margin: 'auto',
-    padding: '50px 0 0'
+    padding: '50px 0 0',
+    transition: 'transform 0.3s ease-in-out',  // Remove the trailing comma here
+    '&:hover': {
+        transform: 'scale(1.1)', // Hover effect for logo
+    }
 });
+
 
 const Wrapper = styled(Box)`
     padding: 25px 35px;
     display: flex;
-    flex: 1;
-    overflow: auto;
     flex-direction: column;
+    align-items: center;
     & > div, & > button, & > p {
         margin-top: 20px;
     }
@@ -34,32 +37,42 @@ const Wrapper = styled(Box)`
 
 const LoginButton = styled(Button)`
     text-transform: none;
-    background:rgb(251, 154, 27);
-    color: #fff;
+    background: #FF4500;
+    color: white;
     height: 48px;
-    border-radius: 2px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    &:hover {
+        background-color: #FF6347;  // Hover effect for login button
+        transform: scale(1.05);
+    }
 `;
 
 const SignupButton = styled(Button)`
     text-transform: none;
-    background: #fff;
-    color: #2874f0;
+    background: white;
+    color: #FF4500;
     height: 48px;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); // Hover effect for signup button
+    }
 `;
 
 const Error = styled(Typography)`
-    font-size: 10px;
+    font-size: 12px;
     color: #ff6161;
-    line-height: 0;
+    line-height: 1;
     margin-top: 10px;
     font-weight: 600;
-`
+`;
 
 const Text = styled(Typography)`
     color: #878787;
-    font-size: 12px;
+    font-size: 14px;
 `;
 
 const loginInitialValues = {
@@ -71,20 +84,20 @@ const signupInitialValues = {
     name: '',
     username: '',
     password: '',
-}
+};
 
-const Login = ({isUserAuthenticated}) => {
+const Login = ({ isUserAuthenticated }) => {
     const [account, toggleAccount] = useState('login');
     const [signup, setSignup] = useState(signupInitialValues);
     const [login, setLogin] = useState(loginInitialValues);
     const [error, showError] = useState('');
-
     const navigate = useNavigate();
     const { setAccount } = useContext(DataContext);
 
     const toggleSignup = () => {
         account === 'signup' ? toggleAccount('login') : toggleAccount('signup');
     }
+
     const onInputChange = (e) => {
         setSignup({ ...signup, [e.target.name]: e.target.value });
     }
@@ -96,7 +109,7 @@ const Login = ({isUserAuthenticated}) => {
             setSignup(signupInitialValues);
             toggleAccount('login');
         } else {
-            showError('Something went wrong! please try again later');
+            showError('Something went wrong! Please try again later.');
         }
     }
 
@@ -104,16 +117,13 @@ const Login = ({isUserAuthenticated}) => {
         let response = await API.userLogin(login);
         if (response.isSuccess) {
             showError('');
-
             sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
             sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
             setAccount({ name: response.data.name, username: response.data.username });
-            
             isUserAuthenticated(true);
-
             navigate('/');
         } else {
-            showError('Something went wrong! please try again later');
+            showError('Something went wrong! Please try again later.');
         }
     }
 
@@ -125,30 +135,26 @@ const Login = ({isUserAuthenticated}) => {
         <Component>
             <Box>
                 <Image src="/logo1.png" alt="blog" />
-                {
-                    account === 'login' ?
-                        <Wrapper>
+                {account === 'login' ? (
+                    <Wrapper>
                         <TextField variant="standard" value={login.username} onChange={(e) => onValueChange(e)} name='username' label='Enter Username' />
                         <TextField variant="standard" value={login.password} onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
-                            
-                            {error && <Error>{error}</Error>}
-
-                            <LoginButton variant="contained" onClick={() => loginUser()} >Login</LoginButton>
-                            <Text style={{ textAlign: 'center' }}>OR</Text>
-                            <SignupButton onClick={() => toggleSignup()} style={{ marginBottom: 50 }}>Create an Account</SignupButton>
-                        </Wrapper> :
-                        <Wrapper>
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter Name' />
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' />
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
-
-                            {error && <Error>{error}</Error>}
-
-                            <SignupButton onClick={() => signupUser()} >Signup</SignupButton>
-                            <Text style={{ textAlign: 'center' }}>OR</Text>
-                            <LoginButton variant="contained" onClick={() => toggleSignup()}>Already have an account</LoginButton>
-                        </Wrapper>
-                }
+                        {error && <Error>{error}</Error>}
+                        <LoginButton variant="contained" onClick={() => loginUser()}>Login</LoginButton>
+                        <Text style={{ textAlign: 'center' }}>OR</Text>
+                        <SignupButton onClick={() => toggleSignup()} style={{ marginBottom: 50 }}>Create an Account</SignupButton>
+                    </Wrapper>
+                ) : (
+                    <Wrapper>
+                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter Name' />
+                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' />
+                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
+                        {error && <Error>{error}</Error>}
+                        <SignupButton onClick={() => signupUser()}>Signup</SignupButton>
+                        <Text style={{ textAlign: 'center' }}>OR</Text>
+                        <LoginButton variant="contained" onClick={() => toggleSignup()}>Already have an account</LoginButton>
+                    </Wrapper>
+                )}
             </Box>
         </Component>
     )

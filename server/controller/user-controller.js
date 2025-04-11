@@ -48,3 +48,10 @@ export const loginUser = async (request, response) => {
         response.status(500).json({ msg: 'error while login the user' })
     }
 }
+
+export const logoutUser = async (request, response) => {
+    const token = request.body.token;
+    await Token.deleteOne({ token: token });
+
+    response.status(204).json({ msg: 'logout successfull' });
+}
