@@ -8,7 +8,7 @@ const Component = styled(Box)`
     width: 400px;
     margin: auto;
     background: linear-gradient(45deg, #FF7F50,rgba(128, 234, 211, 0.9));
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.1);
 `;
@@ -26,12 +26,12 @@ const Image = styled('img')({
 
 
 const Wrapper = styled(Box)`
-    padding: 25px 35px;
+    padding: 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     & > div, & > button, & > p {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 `;
 
@@ -86,6 +86,26 @@ const signupInitialValues = {
     password: '',
 };
 
+const BackgroundWrapper = styled(Box)`
+  min-height: 80vh;
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); 
+  background-size: 700% 700%;
+  animation: rainbowGradient 15s ease infinite;
+
+  @keyframes rainbowGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+`;
+
+
 const Login = ({ isUserAuthenticated }) => {
     const [account, toggleAccount] = useState('login');
     const [signup, setSignup] = useState(signupInitialValues);
@@ -132,6 +152,7 @@ const Login = ({ isUserAuthenticated }) => {
     }
 
     return (
+    <BackgroundWrapper>
         <Component>
             <Box>
                 <Image src="/logo1.png" alt="blog" />
@@ -157,6 +178,7 @@ const Login = ({ isUserAuthenticated }) => {
                 )}
             </Box>
         </Component>
+    </BackgroundWrapper>
     )
 }
 
