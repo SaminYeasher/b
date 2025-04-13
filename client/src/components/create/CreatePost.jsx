@@ -72,7 +72,7 @@ const CreatePost = () => {
                 if (response?.isSuccess && response.data?.imageUrl) {  // <-- Safety check
                     setPost(prevState => ({
                         ...prevState,
-                        picture: response.data.imageUrl
+                        picture: response.data.imageUrl,
                     }));
                 } else {
                     console.error("File upload failed:", response);
@@ -84,9 +84,9 @@ const CreatePost = () => {
         setPost(prevState => ({
             ...prevState,
             categories: location.search?.split('=')[1] || 'All',
-            username: account.username
+            username: account.username,
         }));
-    }, [file]);
+    }, [file, location.search, account.username]);
     
 
     const savePost = async () => {

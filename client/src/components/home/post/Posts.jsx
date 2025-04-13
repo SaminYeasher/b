@@ -29,7 +29,7 @@ const Posts = () => {
         <>
             {
                 posts?.length ? posts.map(post => (
-                    <Grid item lg={3} sm={4} xs={12}>
+                    <Grid container spacing={3} paddingX={2}>
                         <Link style={{textDecoration: 'none', color: 'inherit'}} to={`details/${post._id}`}>
                             <Post post={post} />
                         </Link>

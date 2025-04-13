@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, styled, TextareaAutosize, Button, FormControl, InputBase } from '@mui/material';
 import { AddCircle as Add } from '@mui/icons-material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
+
+
 import { API } from '../../service/api';
 
 // === Styled Components ===
@@ -47,7 +49,7 @@ const initialPost = {
     picture: '',
     username: 'codeforinterview',
     categories: 'Tech',
-    createdDate: new Date()
+    createdDate: new Date(),
 };
 
 const Update = () => {
@@ -81,10 +83,10 @@ const Update = () => {
 
                 const response = await API.uploadFile(data);
                 if (response.isSuccess) {
-                    // ✅ Properly update post state with new image URL
+                    // Properly update post state with new image URL
                     setPost(prevPost => ({
                         ...prevPost,
-                        picture: response.data
+                        picture: response.data.imageUrl,
                     }));
                 }
             }
@@ -114,7 +116,7 @@ const Update = () => {
             {/* Title Input and Upload Button */}
             <StyledFormControl>
                 <label htmlFor="fileInput">
-                    <Add fontSize="large" color="action" />
+                    <Add fontSize="large" color="success" />
                 </label>
                 <input
                     type="file"

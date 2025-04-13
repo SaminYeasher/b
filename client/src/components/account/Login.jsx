@@ -7,7 +7,7 @@ import { DataContext } from '../../context/DataProvider';
 const Component = styled(Box)`
     width: 400px;
     margin: auto;
-    background: linear-gradient(45deg, #FF7F50,rgba(128, 234, 211, 0.9));
+    background: linear-gradient(45deg,rgb(0, 24, 38),rgba(128, 234, 211, 0.9));
     padding: 30px;
     border-radius: 10px;
     box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@ const Image = styled('img')({
     display: 'flex',
     margin: 'auto',
     padding: '50px 0 0',
-    transition: 'transform 0.3s ease-in-out',  // Remove the trailing comma here
+    transition: 'transform 0.3s ease-in-out',
     '&:hover': {
         transform: 'scale(1.1)', // Hover effect for logo
     }
@@ -158,8 +158,8 @@ const Login = ({ isUserAuthenticated }) => {
                 <Image src="/logo1.png" alt="blog" />
                 {account === 'login' ? (
                     <Wrapper>
-                        <TextField variant="standard" value={login.username} onChange={(e) => onValueChange(e)} name='username' label='Enter Username' />
-                        <TextField variant="standard" value={login.password} onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
+                        <TextField variant="standard" value={login.username} onChange={(e) => onValueChange(e)} name='username' label='Enter Username' fullWidth/>
+                        <TextField variant="standard" value={login.password} onChange={(e) => onValueChange(e)} name='password' type='password' label='Enter Password' fullWidth  />
                         {error && <Error>{error}</Error>}
                         <LoginButton variant="contained" onClick={() => loginUser()}>Login</LoginButton>
                         <Text style={{ textAlign: 'center' }}>OR</Text>
@@ -167,14 +167,14 @@ const Login = ({ isUserAuthenticated }) => {
                     </Wrapper>
                 ) : (
                     <Wrapper>
-                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter Name' />
-                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' />
-                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
+                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter Name' fullWidth />
+                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' fullWidth />
+                        <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' type='password' label='Enter Password' fullWidth />
                         {error && <Error>{error}</Error>}
                         <SignupButton onClick={() => signupUser()}>Signup</SignupButton>
                         <Text style={{ textAlign: 'center' }}>OR</Text>
                         <LoginButton variant="contained" onClick={() => toggleSignup()}>Already have an account</LoginButton>
-                    </Wrapper>
+                    </Wrapper>  
                 )}
             </Box>
         </Component>
