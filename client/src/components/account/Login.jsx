@@ -3,11 +3,12 @@ import { TextField, Box, Button, Typography, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
+import staryNightImage from './starry-night.jpg';
 
 const Component = styled(Box)`
     width: 350px;
     margin: auto;
-    background: linear-gradient(45deg,rgb(0, 24, 38),rgba(128, 234, 211, 0.9));
+    background: linear-gradient(45deg,rgb(253, 63, 145),rgba(1, 234, 255, 0.9));
     padding: 25px;
     border-radius: 10px;
     box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.1);
@@ -36,7 +37,7 @@ const Wrapper = styled(Box)`
 
 const LoginButton = styled(Button)`
     text-transform: none;
-    background: #FF4500;
+    background:rgb(219, 139, 0);
     color: white;
     height: 48px;
     border-radius: 5px;
@@ -50,7 +51,7 @@ const LoginButton = styled(Button)`
 const SignupButton = styled(Button)`
     text-transform: none;
     background: white;
-    color: #FF4500;
+    color:rgb(219, 139, 0);
     height: 48px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -89,22 +90,46 @@ const BackgroundWrapper = styled(Box)`
   margin-top: -60px;
   padding: 0;
   height: 100%;
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); 
-  background-size: 700% 700%;
-  animation: rainbowGradient 15s ease infinite;
+  background-image: url(${staryNightImage}); /* Use imported image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: parallaxEffect 30s linear infinite;
 
-  @keyframes rainbowGradient {
+  /* Parallax effect with multiple background layers */
+  @keyframes parallaxEffect {
     0% {
-      background-position: 0% 50%;
+      background-position: 0% 0%;
     }
     50% {
-      background-position: 100% 50%;
+      background-position: 50% 50%;
     }
     100% {
-      background-position: 0% 50%;
+      background-position: 0% 0%;
     }
   }
 `;
+
+// const BackgroundWrapper = styled(Box)`
+//   margin-top: -60px;
+//   padding: 0;
+//   height: 100%;
+//   background: linear-gradient(45deg, black,indigo, violet,white); 
+//   background-size: 700% 700%;
+//   animation: rainbowGradient 15s ease infinite;
+
+//   @keyframes rainbowGradient {
+//     0% {
+//       background-position: 0% 50%;
+//     }
+//     50% {
+//       background-position: 100% 50%;
+//     }
+//     100% {
+//       background-position: 0% 50%;
+//     }
+//   }
+// `;
 
 const Login = ({ isUserAuthenticated }) => {
     const [account, toggleAccount] = useState('login');
