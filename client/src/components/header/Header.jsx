@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 
 
 const Component = styled(AppBar)`
-    background: linear-gradient(to right, #FF7F50,rgb(71, 145, 255)); 
-    color: white;
-    border-radius: 10px; 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    background: linear-gradient(to right,rgb(243, 123, 123),rgb(255, 160, 71)); 
+    color: white; 
+    box-shadow: 0px 4px 6px rgba(4, 4, 4, 0.1); 
 `;
 
 const Container = styled(Toolbar)`
@@ -14,7 +13,7 @@ const Container = styled(Toolbar)`
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     & > a {
-        padding: 20px;
+        padding: 10px;
         color: white;
         text-decoration: none;
         font-weight: bold;

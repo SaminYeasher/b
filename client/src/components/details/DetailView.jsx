@@ -80,6 +80,16 @@ const DetailView = () => {
         }
     }
 
+    // Formatting the date to match the desired format
+    const formattedDate = new Date(post.createdDate).toLocaleDateString('en-US', {
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    });
+
     return (
         <Container>
             <Image src={post.picture || url} alt="post" />
@@ -96,9 +106,9 @@ const DetailView = () => {
 
             <Author>
                 <Link to={`/?username=${post.username}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Typography>Author: <span style={{fontWeight: 600}}>{post.username}</span></Typography>
+                    <Typography>Author: <span style={{fontWeight: 600 }}>{post.username}</span></Typography>
                 </Link>
-                <Typography style={{marginLeft: 'auto'}}>{new Date(post.createdDate).toDateString()}</Typography>
+                <Typography style={{marginLeft: 'auto'}}>{formattedDate}</Typography> {/* Display formatted date */}
             </Author>
 
             <Typography>{post.description}</Typography>

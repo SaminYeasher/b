@@ -21,8 +21,10 @@ const Image = styled('img')({
 
 const StyledTextArea = styled(TextareaAutosize)`
     height: 100px !important;
+    font-size: 15px;
     width: 100%; 
     margin: 0 20px;
+    margin-bottom: 20px;
 `;
 
 const initialValues = {

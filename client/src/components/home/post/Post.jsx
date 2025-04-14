@@ -3,9 +3,9 @@ import { styled, Box, Typography } from '@mui/material';
 
 
 const Container = styled(Box)`
-    border: 1px solid #d3cede;
-    border-radius: 10px;
-    margin: 10px;
+    border: 1px  solid rgb(68, 41, 41);
+    border-radius: 8px;
+    margin: 5px;
     display: flex;
     align-items: center;
     flex-direction: column;
