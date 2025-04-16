@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-
-import { styled, Box, TextareaAutosize, Button, InputBase, FormControl  } from '@mui/material';
+import { styled, Box, TextareaAutosize, Button, InputBase, FormControl } from '@mui/material';
 import { AddCircle as Add } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
 
@@ -30,15 +28,36 @@ const InputTextField = styled(InputBase)`
     flex: 1;
     margin: 0 30px;
     font-size: 25px;
+    font-weight: bold; /* Makes the text bold */
+    padding: 15px;
+    background-color: #f9f9f9;  /* Lighter background */
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease;
+
+    &:focus {
+        border-color: #3f51b5;  /* Change the border on focus */
+        background-color: #e8f0fe; /* Change the background on focus */
+    }
+
+    &::placeholder {
+        color: #aaa;  /* Lighter color for placeholder */
+        font-style: italic;
+    }
 `;
 
 const Textarea = styled(TextareaAutosize)`
     width: 100%;
-    border: none;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0;
     margin-top: 50px;
-    font-size: 18px;
+    font-size: 22px;
+    padding: 12px;
+    min-height: 150px;
     &:focus-visible {
         outline: none;
+        border-color: #3f51b5;
     }
 `;
 
@@ -49,7 +68,7 @@ const initialPost = {
     username: '',
     categories: '',
     createdDate: new Date()
-}
+};
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -60,16 +79,16 @@ const CreatePost = () => {
     const { account } = useContext(DataContext);
 
     const url = post.picture ? post.picture : 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
-    
+
     useEffect(() => {
         const getImage = async () => { 
             if (file) {
                 const data = new FormData();
                 data.append("file", file);
-        
+
                 const response = await API.uploadFile(data); // Upload the file
-        
-                if (response?.isSuccess && response.data?.imageUrl) {  // <-- Safety check
+
+                if (response?.isSuccess && response.data?.imageUrl) {
                     setPost(prevState => ({
                         ...prevState,
                         picture: response.data.imageUrl,
@@ -79,7 +98,7 @@ const CreatePost = () => {
                 }
             }
         }
-    
+
         getImage();
         setPost(prevState => ({
             ...prevState,
@@ -87,7 +106,6 @@ const CreatePost = () => {
             username: account.username,
         }));
     }, [file, location.search, account.username]);
-    
 
     const savePost = async () => {
         await API.createPost(post);
@@ -112,18 +130,22 @@ const CreatePost = () => {
                     style={{ display: "none" }}
                     onChange={(e) => setFile(e.target.files[0])}
                 />
-                <InputTextField onChange={(e) => handleChange(e)} name='title' placeholder="Title" />
+                <InputTextField 
+                    onChange={(e) => handleChange(e)} 
+                    name='title' 
+                    placeholder="What’s your story? Give it a captivating title!" 
+                />
                 <Button onClick={() => savePost()} variant="contained" color="primary">Publish</Button>
             </StyledFormControl>
 
             <Textarea
-                rowsMin={5}
+                rowsMin={6}
                 placeholder="Tell your story..."
                 name='description'
                 onChange={(e) => handleChange(e)} 
             />
         </Container>
-    )
-}
+    );
+};
 
 export default CreatePost;

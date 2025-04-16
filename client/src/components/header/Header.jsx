@@ -1,9 +1,9 @@
-import { AppBar, Toolbar, styled } from '@mui/material'; 
+import { AppBar, Toolbar, styled, Box } from '@mui/material'; 
 import { Link } from 'react-router-dom';
-
+import logo from './logo.png'; // Replace with your actual logo path
 
 const Component = styled(AppBar)`
-    background: linear-gradient(to right,rgb(243, 123, 123),rgb(255, 160, 71)); 
+    background: linear-gradient(to right,rgb(253, 63, 145),rgba(1, 234, 255, 0.9)); 
     color: white; 
     box-shadow: 0px 4px 6px rgba(4, 4, 4, 0.1); 
 `;
@@ -56,17 +56,34 @@ const Container = styled(Toolbar)`
     }
 `;
 
+const LogoContainer = styled(Box)`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1; /* To align logo to the left */
+`;
+
+const Logo = styled('img')`
+    height: 40px; /* Adjust the size of the logo as needed */
+    margin-right: 20px;
+`;
+
 const Header = () => {
     return (
         <Component>
             <Container>
+                <LogoContainer>
+                    <Link to="/">
+                        <Logo src={logo} alt="App Logo" />
+                    </Link>
+                </LogoContainer>
                 <Link to='/'>HOME</Link>
                 <Link to='/about'>ABOUT</Link>
                 <Link to='/contact'>CONTACT</Link>
                 <Link to='/login'>LOGOUT</Link>
             </Container>
         </Component>
-    )
+    );
 }
 
 export default Header;

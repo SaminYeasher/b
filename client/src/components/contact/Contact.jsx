@@ -1,6 +1,17 @@
-
-import { Box, styled, Typography, Link } from '@mui/material';
+import { Box, styled, Typography, Link, Button } from '@mui/material'; 
 import { GitHub, Instagram, Email } from '@mui/icons-material';
+import { keyframes } from '@mui/system';
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Banner = styled(Box)`
     background-image: url(http://mrtaba.ir/image/bg2.jpg);
@@ -8,39 +19,78 @@ const Banner = styled(Box)`
     height: 50vh;
     background-position: left 0px top -100px;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    animation: ${fadeIn} 1.5s ease-out;
 `;
 
 const Wrapper = styled(Box)`
     padding: 20px;
-    & > h3, & > h5 {
-        margin-top: 50px;
-    }
+    text-align: center;
+    animation: ${fadeIn} 2s ease-out;
 `;
 
 const Text = styled(Typography)`
     color: #878787;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    line-height: 1.6;
 `;
 
+const IconLink = styled(Link)`
+    color: inherit;
+    margin: 0 10px;
+    font-size: 2rem;
+    &:hover {
+        color: #3f51b5;
+        transform: scale(1.1);
+        transition: all 0.3s ease;
+    }
+`;
+
+const BannerTextContainer = styled(Box)`
+    background: rgba(18, 17, 17, 0.83);  // Add a semi-transparent black background
+    padding: 20px;
+    border-radius: 8px;
+    animation: ${fadeIn} 2s ease-out;
+`;
 
 const Contact = () => {
     return (
         <Box>
-            <Banner />
+            <Banner>
+                <BannerTextContainer>
+                    <Typography variant="h3" component="h3">Let’s Connect!</Typography>
+                </BannerTextContainer>
+            </Banner>
             <Wrapper>
-                <Typography variant="h3">Getting in touch is easy!</Typography>    
+                <Typography variant="h4" gutterBottom>Getting in touch is easy!</Typography>    
                 <Text variant="h5">
-                    Reach out to me on
-                    <Link href="https://www.instagram.com/codeforinterview/" color="inherit" target="_blank">
-                        <Instagram/>
-                    </Link>
-                    or send me an Email 
-                    <Link href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
-                        <Email />
-                    </Link>.
+                    You can reach out to me on my social channels or send me an email. 
+                    Let's collaborate and chat about exciting opportunities!
                 </Text>
+                <Box mt={4}>
+                    <IconLink href="https://www.instagram.com/codeforinterview/" target="_blank">
+                        <Instagram />
+                    </IconLink>
+                    <IconLink href="https://github.com" target="_blank">
+                        <GitHub />
+                    </IconLink>
+                    <IconLink href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank">
+                        <Email />
+                    </IconLink>
+                </Box>
+                <Box mt={5}>
+                    <Button variant="contained" color="primary" size="large" href="mailto:codeforinterview@gmail.com?Subject=This is a subject">
+                        Send me an Email
+                    </Button>
+                </Box>
             </Wrapper>
         </Box>
     );
-}
+};
 
 export default Contact;
