@@ -78,18 +78,18 @@ const About = () => {
                 <Text variant="h5">
                     We are working on a project for the Web Development course (CSE-242) instructed by Tanvir Azhar Sir, Lecturer of CSE Dept. SoSET.
                     <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://github.com/kunaltyagi9" color="inherit" target="_blank"><GitHub /></Link>
+                        <Link href="https://github.com/SaminYeasher" color="inherit" target="_blank"><GitHub /></Link>
                     </Box>
                 </Text>
                 <Text variant="h5">
                     Need something built or simply want to have a chat? Reach out to me on 
                     <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://www.instagram.com/codeforinterview/" color="inherit" target="_blank">
+                        <Link href="https://www.instagram.com/samin_yeasher1/" color="inherit" target="_blank">
                             <Instagram />
                         </Link>
                     </Box>  
                     or send me an email at 
-                    <Link href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
+                    <Link href="mailto:samismet01@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
                         <Email />
                     </Link>.
                 </Text>

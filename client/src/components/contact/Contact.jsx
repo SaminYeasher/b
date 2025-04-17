@@ -1,5 +1,5 @@
 import { Box, styled, Typography, Link, Button } from '@mui/material'; 
-import { GitHub, Instagram, Email } from '@mui/icons-material';
+import { GitHub, Email, LinkedIn,OpenInNew } from '@mui/icons-material';
 import { keyframes } from '@mui/system';
 
 const fadeIn = keyframes`
@@ -73,13 +73,16 @@ const Contact = () => {
                     Let's collaborate and chat about exciting opportunities!
                 </Text>
                 <Box mt={4}>
-                    <IconLink href="https://www.instagram.com/codeforinterview/" target="_blank">
-                        <Instagram />
+                    <IconLink href="https://www.linkedin.com/in/md-samin-yeasher/" target="_blank">
+                        <LinkedIn />
                     </IconLink>
-                    <IconLink href="https://github.com" target="_blank">
+                    <IconLink href="https://github.com/SaminYeasher" target="_blank">
                         <GitHub />
                     </IconLink>
-                    <IconLink href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank">
+                    <IconLink href="https://saminyeasher.github.io/saminyeasher1" target="_blank">
+                        <OpenInNew />
+                    </IconLink>
+                    <IconLink href="mailto:samsismet01@gmail.com?Subject=This is a subject" target="_blank">
                         <Email />
                     </IconLink>
                 </Box>
