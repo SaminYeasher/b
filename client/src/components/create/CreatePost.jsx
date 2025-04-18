@@ -28,20 +28,20 @@ const InputTextField = styled(InputBase)`
     flex: 1;
     margin: 0 30px;
     font-size: 25px;
-    font-weight: bold; /* Makes the text bold */
+    font-weight: bold;
     padding: 15px;
-    background-color: #f9f9f9;  /* Lighter background */
+    background-color: #f9f9f9;
     border-radius: 10px;
     border: 2px solid #ccc;
     transition: all 0.3s ease;
 
     &:focus {
-        border-color: #3f51b5;  /* Change the border on focus */
-        background-color: #e8f0fe; /* Change the background on focus */
+        border-color: #3f51b5;
+        background-color: #e8f0fe;
     }
 
     &::placeholder {
-        color: #aaa;  /* Lighter color for placeholder */
+        color: #aaa;
         font-style: italic;
     }
 `;
@@ -86,7 +86,7 @@ const CreatePost = () => {
                 const data = new FormData();
                 data.append("file", file);
 
-                const response = await API.uploadFile(data); // Upload the file
+                const response = await API.uploadFile(data); 
 
                 if (response?.isSuccess && response.data?.imageUrl) {
                     setPost(prevState => ({
@@ -143,6 +143,7 @@ const CreatePost = () => {
                 placeholder="Tell your story..."
                 name='description'
                 onChange={(e) => handleChange(e)} 
+                value={post.description}
             />
         </Container>
     );

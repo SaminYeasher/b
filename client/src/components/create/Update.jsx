@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, styled, TextareaAutosize, Button, FormControl, InputBase } from '@mui/material';
 import { AddCircle as Add } from '@mui/icons-material';
-import { useNavigate, useParams} from 'react-router-dom';
-
-
+import { useNavigate, useParams } from 'react-router-dom';
 import { API } from '../../service/api';
 
-// === Styled Components ===
 const Container = styled(Box)(({ theme }) => ({
     margin: '50px 100px',
     [theme.breakpoints.down('md')]: {
@@ -42,7 +39,6 @@ const StyledTextArea = styled(TextareaAutosize)`
     }
 `;
 
-// === Initial State ===
 const initialPost = {
     title: '',
     description: '',
@@ -54,15 +50,13 @@ const initialPost = {
 
 const Update = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); // Extracting post ID from the URL
+    const { id } = useParams(); 
 
-    const [post, setPost] = useState(initialPost); // Post state
-    const [file, setFile] = useState(''); // File state for uploading images
+    const [post, setPost] = useState(initialPost); 
+    const [file, setFile] = useState(''); 
 
-    // Default fallback image
     const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?...';
 
-    // === Fetch post data when component mounts ===
     useEffect(() => {
         const fetchData = async () => {
             let response = await API.getPostById(id);
@@ -73,7 +67,6 @@ const Update = () => {
         fetchData();
     }, [id]);
 
-    // === Upload image whenever 'file' changes ===
     useEffect(() => {
         const getImage = async () => {
             if (file) {
@@ -83,7 +76,6 @@ const Update = () => {
 
                 const response = await API.uploadFile(data);
                 if (response.isSuccess) {
-                    // Properly update post state with new image URL
                     setPost(prevPost => ({
                         ...prevPost,
                         picture: response.data.imageUrl,
@@ -94,26 +86,21 @@ const Update = () => {
         getImage();
     }, [file]);
 
-    // === Handle form input changes (title, description) ===
     const handleChange = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value });
     };
 
-    // === Update post and navigate to details page ===
     const updateBlogPost = async () => {
-
-        let response = await API.updatePost(post); // send updated post to backend
+        let response = await API.updatePost(post); 
         if(response.isSuccess){
-        navigate(`/details/${post._id}`); // go to details page
+            navigate(`/details/${post._id}`); 
         }
     };
 
     return (
         <Container>
-            {/* Display uploaded image or default image */}
             <Image src={`${post.picture || url}?t=${Date.now()}`} alt="post" />
 
-            {/* Title Input and Upload Button */}
             <StyledFormControl>
                 <label htmlFor="fileInput">
                     <Add fontSize="large" color="success" />
@@ -135,7 +122,6 @@ const Update = () => {
                 </Button>
             </StyledFormControl>
 
-            {/* Description Input */}
             <StyledTextArea
                 rowsMin={5}
                 placeholder="Tell your story..."

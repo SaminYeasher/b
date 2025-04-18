@@ -89,7 +89,7 @@ const signupInitialValues = {
 const BackgroundWrapper = styled(Box)`
   margin-top: -60px;
   padding: 0;
-  height: 100%;
+  height: 100vh;
   background-image: url(${staryNightImage}); /* Use imported image */
   background-size: cover;
   background-position: center;
@@ -206,7 +206,7 @@ const Login = ({ isUserAuthenticated }) => {
                             <LoginButton variant="contained" onClick={loginUser}>
                                 Login
                             </LoginButton>
-                            <Text style={{ textAlign: 'center' }}>OR</Text>
+                            <Text style={{ textAlign: 'center', color: 'black'  }}>OR</Text>
                             <SignupButton onClick={toggleSignup} style={{ marginBottom: 50 }}>
                                 Create an Account
                             </SignupButton>

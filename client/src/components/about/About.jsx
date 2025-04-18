@@ -41,16 +41,7 @@ const Text = styled(Typography)`
     line-height: 1.6;
 `;
 
-const IconLink = styled(Link)`
-    color: inherit;
-    margin: 0 10px;
-    font-size: 2rem;
-    &:hover {
-        color: #3f51b5;
-        transform: scale(1.1);
-        transition: all 0.3s ease;
-    }
-`;
+
 
 const BannerTextContainer = styled(Box)`
     background: rgba(0, 0, 0, 0.5);  // Add a semi-transparent black background
@@ -95,7 +86,7 @@ const About = () => {
                 </Text>
                 <MapContainer>
                     <Typography variant="h5" gutterBottom>Our Location</Typography>
-                    <iframe 
+                    <iframe title='iframe'
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.495850675686!2d91.80470027419541!3d22.372657240270897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd85f4dba6a6b%3A0x812e380dbc9fee53!2sEast%20Delta%20University!5e0!3m2!1sen!2sbd!4v1744823127172!5m2!1sen!2sbd"
                         width="100%" 
                         height="350" 

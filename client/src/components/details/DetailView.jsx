@@ -1,14 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-
 import { Box, Typography, styled } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import { Link, useNavigate, useParams } from 'react-router-dom'
-
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { API } from '../../service/api';
-
 import { DataContext } from '../../context/DataProvider';
-
-// components
 import Comments from './comments/Comments';
 
 const Container = styled(Box)(({ theme }) => ({
@@ -69,7 +64,7 @@ const DetailView = () => {
             if (response.isSuccess) {
                 setPost(response.data);
             }
-        }
+        };
         fetchData();
     }, [id]);
 
@@ -108,10 +103,14 @@ const DetailView = () => {
                 <Link to={`/?username=${post.username}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Typography>Author: <span style={{fontWeight: 600 }}>{post.username}</span></Typography>
                 </Link>
-                <Typography style={{marginLeft: 'auto'}}>{formattedDate}</Typography> {/* Display formatted date */}
+                <Typography style={{marginLeft: 'auto'}}>{formattedDate}</Typography> 
             </Author>
 
-            <Typography>{post.description}</Typography>
+            {/* Display the description with line breaks */}
+            <Typography style={{ whiteSpace: 'pre-line' }}>
+                {post.description}
+            </Typography>
+
             <Comments post={post} />
         </Container>
     )
