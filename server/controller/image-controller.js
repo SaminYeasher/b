@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000';
+const url = 'https://storyflowblog.onrender.com';
 
 export const uploadImage = (req, res) => {
     if (!req.file) {
