@@ -3,7 +3,7 @@ import { TextField, Box, Button, Typography, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
-import staryNightImage from './starry-night.jpg';
+import staryNightImage from './components/account/starry-night.jpg';
 
 const Component = styled(Box)`
     width: 350px;
