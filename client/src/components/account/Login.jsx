@@ -3,7 +3,7 @@ import { TextField, Box, Button, Typography, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
-import staryNightImage from './components/account/starry-night.jpg';
+
 
 const Component = styled(Box)`
     width: 350px;
@@ -90,7 +90,7 @@ const BackgroundWrapper = styled(Box)`
   margin-top: -60px;
   padding: 0;
   height: 100vh;
-  background-image: url(${staryNightImage}); /* Use imported image */
+ background-image: url('/starry-night.jpg'); /* Use imported image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
