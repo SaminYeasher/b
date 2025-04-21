@@ -32,9 +32,9 @@ app.listen(PORT, () => console.log(`server is running on successfully on PORT ${
 const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 
-process.env.MONGODB_URI = `mongodb://${username}:${password}@blog-app-shard-00-00.srugn.mongodb.net:27017,blog-app-shard-00-01.srugn.mongodb.net:27017,blog-app-shard-00-02.srugn.mongodb.net:27017/?replicaSet=atlas-8unvhg-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=blog-app`;
 
-mongoose.connect(MONGODB_URI);
+
+//mongoose.connect(MONGODB_URI);
 
 
 Connection(username,password);
