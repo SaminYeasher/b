@@ -24,6 +24,9 @@ app.use('/', imageRoute);
 
 app.use('/uploads', express.static(path.join(path.resolve(), 'uploads')));
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(""))
+}
 
 const PORT = process.env.PORT || 8000;;
 
@@ -32,7 +35,7 @@ app.listen(PORT, () => console.log(`server is running on successfully on PORT ${
 const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 
-const MONGODB_URI = `mongodb://${username}:${password}@blog-app-shard-00-00.srugn.mongodb.net:27017,blog-app-shard-00-01.srugn.mongodb.net:27017,blog-app-shard-00-02.srugn.mongodb.net:27017/?replicaSet=atlas-8unvhg-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=blog-app`;
+const URL = process.env.MONGODB_URI || `mongodb://${username}:${password}@blog-app-shard-00-00.srugn.mongodb.net:27017,blog-app-shard-00-01.srugn.mongodb.net:27017,blog-app-shard-00-02.srugn.mongodb.net:27017/?replicaSet=atlas-8unvhg-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=blog-app`;
 
 mongoose.connect(MONGODB_URI);
 
