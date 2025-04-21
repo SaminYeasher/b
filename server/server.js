@@ -25,7 +25,7 @@ app.use('/', imageRoute);
 app.use('/uploads', express.static(path.join(path.resolve(), 'uploads')));
 
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(""))
+    app.use(express.static("client/build"));
 }
 
 const PORT = process.env.PORT || 8000;;

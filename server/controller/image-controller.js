@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000';
+const url = '';
 
 export const uploadImage = (req, res) => {
     if (!req.file) {
