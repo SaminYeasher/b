@@ -3,7 +3,8 @@ import axios from 'axios';
 import { API_NOTIFICATION_MESSAGES, SERVICE_URLS } from '../constants/config.js';
 import { getAccessToken,getType } from '../utils/common-utils.js';
 
-const API_URL = 'http://localhost:8000/' //process.env.REACT_APP_API_URL || 'http://localhost:8000/';
+const isProduction = process.env.NODE_ENV === 'production'; 
+const API_URL = isProduction ? 'https://storyflowblog.onrender.com' : 'http://localhost:8000/';
 
 
 

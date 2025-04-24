@@ -1,4 +1,5 @@
-const url = 'http://localhost:8000';
+const isProduction = process.env.NODE_ENV === 'production'; 
+const url = isProduction ? 'https://storyflowblog.onrender.com' : 'http://localhost:8000';
 
 export const uploadImage = (req, res) => {
     if (!req.file) {
