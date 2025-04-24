@@ -12,26 +12,49 @@ const Image = styled(Box)`
 
 const Heading = styled(Typography)`
     font-size: 70px;
-    color:rgb(0, 0, 0);
-    line-height: 2;
+    color: #F8EC4E; /* A simple dark color for the text */
     font-weight: bold;
-    text-transform: uppercase;  /* Makes the heading more dramatic */
-    letter-spacing: 2px;  /* Adds spacing between the letters */
-    background: linear-gradient(45deg,rgb(248, 236, 78),rgb(243, 235, 0));
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 2px 2px 4px rgba(255, 204, 0, 0.7);  /* Adds depth to the text */
-    animation: fadeIn 2s ease-in-out;
-    
-    @keyframes fadeIn {
+    text-transform: uppercase;
+    letter-spacing: 1.5px; /* A slight spacing between the letters for a modern feel */
+    position: relative; /* Needed for the underline effect */
+    z-index: 1;
+
+    /* A simple underline animation that gives the text a smooth appearance */
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: -5px; /* Position the underline slightly below the text */
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #F8EC4E; /* A subtle yellow color for the underline */
+        animation: underlineAnimation 1s ease-in-out forwards;
+    }
+
+    @keyframes underlineAnimation {
         0% {
-            opacity: 0;
-            transform: translateY(20px);
+            width: 0;
         }
         100% {
-            opacity: 1;
-            transform: translateY(0);
+            width: 100%;
         }
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 1200px) {
+        font-size: 60px; /* Adjust font size for medium screens */
+    }
+
+    @media (max-width: 900px) {
+        font-size: 50px; /* Adjust font size for smaller screens */
+    }
+
+    @media (max-width: 600px) {
+        font-size: 40px; /* Further adjust font size for very small screens */
+    }
+
+    @media (max-width: 400px) {
+        font-size: 30px; /* Set smaller font size for very small devices */
     }
 `;
 

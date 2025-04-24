@@ -14,7 +14,7 @@ const Container = styled(Toolbar)`
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     & > a {
         padding: 10px;
-        color: white;
+        color: black;
         text-decoration: none;
         font-weight: bold;
         transition: color 0.3s ease, transform 0.3s ease;
@@ -36,7 +36,7 @@ const Container = styled(Toolbar)`
         }
 
         &:hover {
-            color:rgb(36, 34, 24); 
+            color:rgb(255, 255, 255); 
             transform: scale(1.1); 
         }
     }

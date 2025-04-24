@@ -4,8 +4,13 @@ import Comment from '../model/comment.js';
 
 export const newComment = async (request, response) => {
     try {
-        const comment = await new Comment(request.body);
-        comment.save();
+        const commentData = {
+            ...request.body,
+            date: new Date() // Set the current timestamp explicitly
+        };
+
+        const comment = new Comment(commentData);
+        await comment.save(); // Ensure the comment is saved properly
 
         response.status(200).json('Comment saved successfully');
     } catch (error) {
