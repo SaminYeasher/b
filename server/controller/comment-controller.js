@@ -32,7 +32,7 @@ export const getComments = async (request, response) => {
 
 export const deleteComment = async (request, response) => {
     try {
-        // Use findByIdAndDelete which will return the deleted document
+        // Use findByIdAndDelete which will deleted the comment
         const comment = await Comment.findByIdAndDelete(request.params.id);
 
         // If no comment is found, return a 404 response
