@@ -1,18 +1,7 @@
 import gridfsStream from 'gridfs-stream';
 import mongoose from 'mongoose';
 
-const isProduction = process.env.NODE_ENV === 'production'; 
-const url = isProduction ? 'https://storyflowblog.onrender.com' : 'http://localhost:8000';
-
-let gfs, gridfsBucket;
-const conn = mongoose.connection;
-conn.once('open', () => {
-    gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
-        bucketName: 'photos'
-    });
-    gfs = gridfsStream(conn.db, mongoose.mongo);
-    gfs.collection('photos');
-});
+const url = process.env.RENDER || process.env.NODE_ENV === 'production' ? 'https://storyflowblog.onrender.com' : 'http://localhost:8000';
 
 export const uploadImage = (req, res) => {
     if (!req.file) {
@@ -24,16 +13,16 @@ export const uploadImage = (req, res) => {
 
 export const getImage = async (request, response) => {
     try {
-        const file = await gfs.files.findOne({ filename: request.params.filename });
-        if (!file) {
-            return response.status(404).json("File not found");
-        }
-        
-        // Wait, since we used bucketName "photos" in upload.js, let's use the standard way:
-        const bucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
             bucketName: 'photos'
         });
-        const readStream = bucket.openDownloadStreamByName(file.filename);
+        
+        const files = await bucket.find({ filename: request.params.filename }).toArray();
+        if (!files || files.length === 0) {
+            return response.status(404).json("File not found");
+        }
+
+        const readStream = bucket.openDownloadStreamByName(request.params.filename);
         readStream.pipe(response);
     } catch (error) {
         response.status(500).json({ msg: error.message });
