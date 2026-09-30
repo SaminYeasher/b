@@ -7,7 +7,6 @@ import { DataContext } from '../../context/DataProvider';
 
 const Component = styled(Box)`
     width: 350px;
-    margin: auto;
     background: linear-gradient(45deg,rgb(253, 63, 145),rgba(1, 234, 255, 0.9));
     padding: 25px;
     border-radius: 10px;
@@ -84,12 +83,16 @@ const signupInitialValues = {
     name: '',
     username: '',
     password: '',
+    confirmPassword: '',
 };
 
 const BackgroundWrapper = styled(Box)`
-  margin-top: -60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
-  height: 100vh;
+  box-sizing: border-box;
  background-image: url('/starry-night.jpg'); /* Use imported image */
   background-size: cover;
   background-position: center;
@@ -148,6 +151,15 @@ const Login = ({ isUserAuthenticated }) => {
     };
 
     const signupUser = async () => {
+        if (signup.password !== signup.confirmPassword) {
+            showError('Passwords do not match.');
+            return;
+        }
+        if (!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(signup.password)) {
+            showError('Password must contain both letters and numbers.');
+            return;
+        }
+
         let response = await API.userSignup(signup);
         if (response.isSuccess) {
             showError('');
@@ -235,6 +247,14 @@ const Login = ({ isUserAuthenticated }) => {
                                 name="password"
                                 type="password"
                                 label="Enter Password"
+                                fullWidth
+                            />
+                            <TextField
+                                variant="standard"
+                                onChange={onInputChange}
+                                name="confirmPassword"
+                                type="password"
+                                label="Confirm Password"
                                 fullWidth
                             />
                             {error && <Error>{error}</Error>}
