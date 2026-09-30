@@ -1,5 +1,6 @@
 ```
 # ...existing code...
-.env
 # ...existing code...
 ```
+config.bat
+node_modules
