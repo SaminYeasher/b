@@ -91,7 +91,7 @@ const BackgroundWrapper = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: 20px 0; /* Add padding so it doesn't hit the screen edges on small screens */
   box-sizing: border-box;
  background-image: url('/starry-night.jpg'); /* Use imported image */
   background-size: cover;
@@ -144,6 +144,7 @@ const Login = ({ isUserAuthenticated }) => {
 
     const toggleSignup = () => {
         account === 'signup' ? toggleAccount('login') : toggleAccount('signup');
+        showError('');
     };
 
     const onInputChange = (e) => {
@@ -166,7 +167,7 @@ const Login = ({ isUserAuthenticated }) => {
             setSignup(signupInitialValues);
             toggleAccount('login');
         } else {
-            showError('Something went wrong! Please try again later.');
+            showError(typeof response.msg === 'string' ? response.msg : 'Something went wrong! Please try again later.');
         }
     };
 
@@ -180,7 +181,7 @@ const Login = ({ isUserAuthenticated }) => {
             isUserAuthenticated(true);
             navigate('/');
         } else {
-            showError('Something went wrong! Please try again later.');
+            showError(typeof response.msg === 'string' ? response.msg : 'Something went wrong! Please try again later.');
         }
     };
 
@@ -227,22 +228,25 @@ const Login = ({ isUserAuthenticated }) => {
                         <Wrapper>
                             <TextField
                                 variant="standard"
+                                value={signup.name}
                                 onChange={onInputChange}
                                 name="name"
-                                type="name"
+                                type="text"
                                 label="Enter Name"
                                 fullWidth
                             />
                             <TextField
                                 variant="standard"
+                                value={signup.username}
                                 onChange={onInputChange}
                                 name="username"
-                                type="name"
+                                type="text"
                                 label="Enter Username"
                                 fullWidth
                             />
                             <TextField
                                 variant="standard"
+                                value={signup.password}
                                 onChange={onInputChange}
                                 name="password"
                                 type="password"
@@ -251,6 +255,7 @@ const Login = ({ isUserAuthenticated }) => {
                             />
                             <TextField
                                 variant="standard"
+                                value={signup.confirmPassword}
                                 onChange={onInputChange}
                                 name="confirmPassword"
                                 type="password"
@@ -258,11 +263,11 @@ const Login = ({ isUserAuthenticated }) => {
                                 fullWidth
                             />
                             {error && <Error>{error}</Error>}
-                            <SignupButton onClick={signupUser}>Signup</SignupButton>
+                            <LoginButton variant="contained" onClick={signupUser}>Signup</LoginButton>
                             <Text style={{ textAlign: 'center' }}>OR</Text>
-                            <LoginButton variant="contained" onClick={toggleSignup}>
+                            <SignupButton onClick={toggleSignup} style={{ marginBottom: 50 }}>
                                 Already have an account
-                            </LoginButton>
+                            </SignupButton>
                         </Wrapper>
                     )}
                 </Box>

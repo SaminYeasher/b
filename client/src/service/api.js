@@ -4,7 +4,7 @@ import { API_NOTIFICATION_MESSAGES, SERVICE_URLS } from '../constants/config.js'
 import { getAccessToken,getType } from '../utils/common-utils.js';
 
 const isProduction = process.env.NODE_ENV === 'production'; 
-const API_URL = isProduction ? 'https://storyflowblog.onrender.com' : 'http://localhost:8000/';
+const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000/' : 'https://storyflowblog.onrender.com';
 
 
 
@@ -71,7 +71,7 @@ const ProcessError = async (error) => {
         console.log("ERROR IN RESPONSE: ", error.toJSON());
         return {
             isError: true,
-            msg: API_NOTIFICATION_MESSAGES.responseFailure,
+            msg: error.response.data && error.response.data.msg ? error.response.data.msg : API_NOTIFICATION_MESSAGES.responseFailure,
             code: error.response.status
         }
     } else if (error.request) { 

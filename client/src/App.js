@@ -19,7 +19,9 @@ const PrivateRoute = ({ isAuthenticated, ...props }) => {
   return isAuthenticated && token ? 
     <>
       <Header />
-      <Outlet />
+      <div style={{marginTop: 60, marginBottom: 64}}>
+        <Outlet />
+      </div>
     </> : <Navigate replace to='/login' />
 };
 
@@ -31,7 +33,6 @@ function App() {
     <DataProvider>
       <BrowserRouter>
 
-      <div style={{marginTop: 60, marginBottom: 64}}>
         <Routes>
           <Route path='/login' element= {<Login isUserAuthenticated={isUserAuthenticated} />} />
           
@@ -60,7 +61,6 @@ function App() {
             </Route>
 
         </Routes>
-      </div>
       </BrowserRouter>
     </DataProvider>
   );
